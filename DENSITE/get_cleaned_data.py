@@ -1,16 +1,16 @@
 import csv
 import os
+from glob import glob
 
-# Input files and output file paths
-input_files = [
-    "/Users/hadescuisinier/epsi/mspr/MSPR/DENSITE/DENSITE-2012.csv",
-    "/Users/hadescuisinier/epsi/mspr/MSPR/DENSITE/DENSITE-2017.csv",
-    "/Users/hadescuisinier/epsi/mspr/MSPR/DENSITE/DENSITE-2022.csv"
-]
-output_file = "/Users/hadescuisinier/epsi/mspr/MSPR/DENSITE/DENSITE-combined.csv"
+# Directory containing the input files
+input_dir = os.path.dirname(__file__)  # Directory of the current script
+output_file = os.path.join(input_dir, "DENSITE-combined.csv")
 
 # Function to clean and combine the files
-def clean_and_combine(input_files, output_path):
+def clean_and_combine(input_dir, output_path):
+    # Dynamically find all DENSITE-*.csv files in the input directory
+    input_files = glob(os.path.join(input_dir, "DENSITE-*.csv"))
+
     with open(output_path, "w", encoding="utf-8", newline="") as outfile:
         writer = csv.writer(outfile)
         # Write the header row
@@ -33,5 +33,5 @@ def clean_and_combine(input_files, output_path):
                         writer.writerow(row)
 
 # Clean and combine the files
-clean_and_combine(input_files, output_file)
+clean_and_combine(input_dir, output_file)
 print(f"Combined file saved to: {output_file}")
