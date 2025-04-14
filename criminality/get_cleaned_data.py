@@ -17,7 +17,7 @@ def get_cleaned_data():
         try:
             return int(code) < 970
         except ValueError:
-            return False
+            return False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
     df = df[df['Code_departement'].apply(is_metropolitan)]
 
