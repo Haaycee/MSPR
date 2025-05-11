@@ -1,10 +1,11 @@
-from age.get_cleaned_data import get_cleaned_data as get_age_data
-# from data.criminality.get_cleaned_data import get_cleaned_data as get_criminality_data
-# from data.elections.get_cleaned_data import get_cleaned_data as get_elections_data
-# from data.unemployment.get_cleaned_data import get_cleaned_data as get_unemployment_data
-# from data.wealth_per_capita.get_cleaned_data import get_cleaned_data as get_wealth_data
-# from data.immigration.get_cleaned_data import get_cleaned_data as get_immigration_data
-# from data.real_estate.get_cleaned_data import get_cleaned_data as get_real_estate_data
+from data.age.get_cleaned_data import get_cleaned_data as get_age_data
+from data.criminality.get_cleaned_data import get_cleaned_data as get_criminality_data
+from data.elections.get_cleaned_data import get_cleaned_data as get_elections_data
+from data.unemployment.get_cleaned_data import get_cleaned_data as get_unemployment_data
+from data.wealth_per_capita.get_cleaned_data import get_cleaned_data as get_wealth_data
+from data.immigration.get_cleaned_data import get_cleaned_data as get_immigration_data
+from data.real_estate.get_cleaned_data import get_cleaned_data as get_real_estate_data
+from data.average_salary.get_cleaned_data import get_cleaned_data as get_average_salary_data
 import pandas as pd
 
 if __name__ == "__main__":
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     #     }
     # }
     
-    # criminality_data = get_criminality_data()
+    criminality_data = get_criminality_data()
     # Example of criminality_data structure:
     # {
     #     '2017': {
@@ -38,7 +39,7 @@ if __name__ == "__main__":
     #     }
     # }
     
-    # elections_data = get_elections_data()
+    elections_data = get_elections_data()
     # Example of elections_data structure:
     # {
     #     '2017': {
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     #     }
     # }
     
-    # unemployment_data = get_unemployment_data()
+    unemployment_data = get_unemployment_data()
     # Example of unemployment_data structure:
     # {
     #     '2017': {
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     #     }
     # }
     
-    # wealth_data = get_wealth_data()
+    wealth_data = get_wealth_data()
     # Example of wealth_data structure:
     # {
     #     '2017': {
@@ -102,7 +103,7 @@ if __name__ == "__main__":
     #     }
     # }
     
-    # immigration_data = get_immigration_data()
+    immigration_data = get_immigration_data()
     # Example of immigration_data structure:
     # {
     #     '2017': {
@@ -116,7 +117,7 @@ if __name__ == "__main__":
     #     }
     # }
     
-    # real_estate_data = get_real_estate_data()
+    real_estate_data = get_real_estate_data()
     # {
     #     '2017': {
     #         '01': 3.611, // Prixm2Moyen par département en 2017
@@ -125,6 +126,23 @@ if __name__ == "__main__":
     #     },
     #     '2022': {
     #         '01': 3.733, // Prixm2Moyen par département en 2022
+    #         # ... other departments
+    #     }
+    # }
+    
+    average_salary_data = get_average_salary_data()
+    # {
+    #     '2012': {
+    #         '01': 25000,  # (int) average salary for department 01 in 2012
+    #         '02': 27000,
+    #         # ... other departments
+    #     },
+    #     '2017': {
+    #         '01': 28000,
+    #         # ... other departments
+    #     },
+    #     '2022': {
+    #         '01': 30000,
     #         # ... other departments
     #     }
     # }
@@ -145,51 +163,53 @@ if __name__ == "__main__":
         if age_stats is None:
             continue
         
-        # departments = criminality_data.get(year, {})
+        departments = criminality_data.get(year, {})
         childs = age_stats.get("CHILDRENS")
         adults = age_stats.get("ADULTS")
         seniors = age_stats.get("SENIORS")
         
         # Pour chaque département métropolitain de l'année, on crée une ligne de données
-        # for dept_code, crime_rate in departments.items():
-        #     if dept_code not in METROPOLITAN_DEPTS:
-        #         continue
+        for dept_code, crime_rate in departments.items():
+            if dept_code not in METROPOLITAN_DEPTS:
+                continue
             
-        #     # Récupérer les données électorales pour le département et l'année correspondante
-        #     election_dept_data = elections_data.get(year, {}).get(dept_code, {})
-        #     vote_pct = election_dept_data.get("resultats_partis_pct", {})
-        #     vote_orientation_pct = election_dept_data.get("resultats_orientation_pct", {})
+            # Récupérer les données électorales pour le département et l'année correspondante
+            election_dept_data = elections_data.get(year, {}).get(dept_code, {})
+            vote_pct = election_dept_data.get("resultats_partis_pct", {})
+            vote_orientation_pct = election_dept_data.get("resultats_orientation_pct", {})
             
-        #     abstention_pct = election_dept_data.get("abstentions_pct", None)
-        #     unemployment_rate = unemployment_data.get(year, {}).get(dept_code, None)
-        #     wealth_per_capita = wealth_data.get(year, {}).get(dept_code, None)
-        #     immigration_rate = immigration_data.get(year, {}).get(dept_code, None)
-        #     real_estate_price = real_estate_data.get(year, {}).get(dept_code, None)
+            abstention_pct = election_dept_data.get("abstentions_pct", None)
+            unemployment_rate = unemployment_data.get(year, {}).get(dept_code, None)
+            wealth_per_capita = wealth_data.get(year, {}).get(dept_code, None)
+            immigration_rate = immigration_data.get(year, {}).get(dept_code, None)
+            real_estate_price = real_estate_data.get(year, {}).get(dept_code, None)
+            average_salary = average_salary_data.get(year, {}).get(dept_code, None)
             
-        #     # Construire la ligne de données
-        #     row = {
-        #         "department_code": dept_code,
-        #         "year": year,
-        #         "criminality_indice": crime_rate,
-        #         "childs": childs,
-        #         "adults": adults,
-        #         "seniors": seniors,
-        #         "average_price_per_m2": real_estate_price,
-        #         "unemployment_rate": unemployment_rate,
-        #         "wealth_per_capita": wealth_per_capita,
-        #         "immigration_rate": immigration_rate,
-        #         "abstentions_pct": abstention_pct
-        #     }
+            # Construire la ligne de données
+            row = {
+                "department_code": dept_code,
+                "year": year,
+                "criminality_indice": crime_rate,   
+                "childs": childs,
+                "adults": adults,
+                "seniors": seniors,
+                "average_price_per_m2": real_estate_price,
+                "average_salary": average_salary,
+                "unemployment_rate": unemployment_rate,
+                "wealth_per_capita": wealth_per_capita,
+                "immigration_rate": immigration_rate,
+                "abstentions_pct": abstention_pct
+            }
             
-        #     # Ajouter les pourcentages d'orientation pour chaque parti
-        #     for orientation, pct in vote_orientation_pct.items():
-        #         row[f"vote_orientation_pct_{orientation}"] = pct
+            # Ajouter les pourcentages d'orientation pour chaque parti
+            for orientation, pct in vote_orientation_pct.items():
+                row[f"vote_orientation_pct_{orientation}"] = pct
             
-        #     # Ajouter les pourcentages de vote pour chaque parti
-        #     for party, pct in vote_pct.items():
-        #         row[f"vote_pct_{party}"] = pct
+            # Ajouter les pourcentages de vote pour chaque parti
+            for party, pct in vote_pct.items():
+                row[f"vote_pct_{party}"] = pct
             
-        #     rows.append(row)
+            rows.append(row)
     
     # Création d'un DataFrame pandas avec les données fusionnées
     df = pd.DataFrame(rows)
