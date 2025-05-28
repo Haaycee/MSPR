@@ -13,7 +13,7 @@ def get_cleaned_data():
     print(df_2017.columns) # Pour vérifier les colonnes disponibles
     
     # Harmonisation des colonnes, adapte ici si besoin
-    df_2017['Department'] = df_2017['Département'].astype(str).str.zfill(2)
+    df_2017['Department'] = df_2017['Code'].astype(str).str.zfill(2)
     df_2017['Median_Living_Standard'] = df_2017['Valeur']
     
     result_2017 = df_2017[['Department', 'Median_Living_Standard']].copy()
@@ -22,7 +22,7 @@ def get_cleaned_data():
     # --- Lecture et traitement pour l'année 2022 ---
     df_2022 = pd.read_excel(NIVEAU_VIE_MEDIAN_2022_FILE, header=HEADER_LINE_2022)
     print(df_2022.columns) # Pour vérifier les colonnes disponibles
-    df_2022['Department'] = df_2022['Department '].astype(str).str.zfill(2)
+    df_2022['Department'] = df_2022['Code'].astype(str).str.zfill(2)
     df_2022['Median_Living_Standard'] = df_2022['Valeur']
     
     result_2022 = df_2022[['Department', 'Median_Living_Standard']].copy()
