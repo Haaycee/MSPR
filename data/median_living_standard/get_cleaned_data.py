@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Chemins à adapter selon ta structure
-NIVEAU_VIE_MEDIAN_2017_FILE = "/home/thibault/Desktop/MSPR/data/median_living_standard/Niveau_de_vie_median_2017.xlsx"
-NIVEAU_VIE_MEDIAN_2022_FILE = "/home/thibault/Desktop/MSPR/data/median_living_standard/Niveau_de_vie_median_2022.xlsx"
+NIVEAU_VIE_MEDIAN_2017_FILE = "/home/thibault/Desktop/MSPR/data/median_living_standard/median_living_standard_2017.xlsx"
+NIVEAU_VIE_MEDIAN_2022_FILE = "/home/thibault/Desktop/MSPR/data/median_living_standard/median_living_standard_2022.xlsx"
 
 HEADER_LINE_2017 = 0
 HEADER_LINE_2022 = 0

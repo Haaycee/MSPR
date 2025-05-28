@@ -7,6 +7,9 @@ from data.immigration.get_cleaned_data import get_cleaned_data as get_immigratio
 from data.real_estate.get_cleaned_data import get_cleaned_data as get_real_estate_data
 from data.average_salary.get_cleaned_data import get_cleaned_data as get_average_salary_data
 from data.median_living_standard.get_cleaned_data import get_cleaned_data as get_median_living_standard_data
+from data.density.get_cleaned_data import get_cleaned_data as get_density_data
+from data.natality.get_cleaned_data import get_cleaned_data as get_natality_data
+
 import pandas as pd
 
 if __name__ == "__main__":
@@ -24,10 +27,21 @@ if __name__ == "__main__":
     #         'ADULTS': 32137327,
     #         'SENIORS': 17850878
     #     }
-    # }
+    # }dza
+
+
+
     
 
     median_living_standard_data = get_median_living_standard_data()
+
+    density_data = get_density_data()
+
+    natality_data = get_natality_data()
+
+
+
+    
     
     criminality_data = get_criminality_data()
     # Example of criminality_data structure:
@@ -188,7 +202,12 @@ if __name__ == "__main__":
             immigration_rate = immigration_data.get(year, {}).get(dept_code, None)
             real_estate_price = real_estate_data.get(year, {}).get(dept_code, None)
             average_salary = average_salary_data.get(year, {}).get(dept_code, None)
+
+            # Lastly, on récupère les données supplémentaires
             median_living_standard = median_living_standard_data.get(year, {}).get(dept_code, None)
+            density_value = density_data.get(year, {}).get(dept_code, None)
+            natality_rate = natality_data.get(year, {}).get(dept_code, None)
+
             
             # Construire la ligne de données
             row = {
@@ -205,7 +224,9 @@ if __name__ == "__main__":
                 "immigration_rate": immigration_rate,
                 "abstentions_pct": abstention_pct,
                 # AJOUTS
-                "median_living_standard": median_living_standard_data.get(year, {}).get(dept_code, None),
+                "median_living_standard": median_living_standard,   # <-- utilisation de la variable
+                "density_value": density_value,
+                "natality_rate": natality_rate,
             }
             
             # Ajouter les pourcentages d'orientation pour chaque parti
