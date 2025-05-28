@@ -6,6 +6,7 @@ from data.wealth_per_capita.get_cleaned_data import get_cleaned_data as get_weal
 from data.immigration.get_cleaned_data import get_cleaned_data as get_immigration_data
 from data.real_estate.get_cleaned_data import get_cleaned_data as get_real_estate_data
 from data.average_salary.get_cleaned_data import get_cleaned_data as get_average_salary_data
+from data.median_living_standard.get_cleaned_data import get_cleaned_data as get_median_living_standard_data
 import pandas as pd
 
 if __name__ == "__main__":
@@ -24,6 +25,9 @@ if __name__ == "__main__":
     #         'SENIORS': 17850878
     #     }
     # }
+    
+
+    median_living_standard_data = get_median_living_standard_data()
     
     criminality_data = get_criminality_data()
     # Example of criminality_data structure:
