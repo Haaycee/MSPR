@@ -188,6 +188,7 @@ if __name__ == "__main__":
             immigration_rate = immigration_data.get(year, {}).get(dept_code, None)
             real_estate_price = real_estate_data.get(year, {}).get(dept_code, None)
             average_salary = average_salary_data.get(year, {}).get(dept_code, None)
+            median_living_standard = median_living_standard_data.get(year, {}).get(dept_code, None)
             
             # Construire la ligne de données
             row = {
@@ -202,7 +203,9 @@ if __name__ == "__main__":
                 "unemployment_rate": unemployment_rate,
                 "wealth_per_capita": wealth_per_capita,
                 "immigration_rate": immigration_rate,
-                "abstentions_pct": abstention_pct
+                "abstentions_pct": abstention_pct,
+                # AJOUTS
+                "median_living_standard": median_living_standard_data.get(year, {}).get(dept_code, None),
             }
             
             # Ajouter les pourcentages d'orientation pour chaque parti
